@@ -1,0 +1,7 @@
+# The format is consistent with the. gitignore file.
+# The root directory is $TERMUX_APP__Files_DIR.
+
+/apps
+/usr/tmp
+/home/.cache
+/usr/var/log
