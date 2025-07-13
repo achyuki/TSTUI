@@ -278,7 +278,7 @@ dialog_input_branchname() {
 # Command help
 show_help() {
     echo "TermuxSnapshotTUI (TSTUI) - Termux snapshot management tool based on git"
-    echo "v0.1.0"
+    echo "v0.1.3"
     echo ""
     echo "Usage: tstui [command] [options]"
     echo ""
