@@ -27,7 +27,7 @@ You can configure ignore rules in the `~/.tstuignore` file.
 These paths will be ignored during backup.
 
 ```
-# The format is consistent with the. gitignore file.
+# The format is consistent with the .gitignore file.
 # The root directory is $TERMUX_APP__Files_DIR.
 
 /apps
@@ -40,6 +40,7 @@ These paths will be ignored during backup.
 ## Tips
 
 * Due to the nature of Git, empty directories will not be backed up.
+* Do not interrupt while performing time-consuming operations, as it may cause abnormal snapshot systems or environments.
 
 ## License
 
