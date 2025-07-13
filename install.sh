@@ -41,7 +41,7 @@ if ! which dialog git &>/dev/null; then
 fi
 
 info "Installing TSTUI..."
-repodownload "install.sh" $TSTUI_PATH
+repodownload "tstui.sh" $TSTUI_PATH
 repodownload ".tstuiignore" $TSTUI_IGNORE_PATH
 
 chmod 700 $TSTUI_PATH
