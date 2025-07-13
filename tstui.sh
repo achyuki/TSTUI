@@ -115,15 +115,15 @@ check_branchname_orexit() {
     fi
 }
 
-git_add_patch() {
-    # 先处理 .gitignore, 不然会灵车.
+findwrap_patch() {
     findwrap ".gitignore" | mv_regex "\(.*\)" ".TSTUI_\1"
-    findwrap ".gitattributes" | mv_regex "\(.*\)" ".TSTUI_\1"
-    findwrap ".git" | mv_regex "\(.*\)" ".TSTUI_\1"
 }
 
-git_add_unpatch() {
-    findwrap ".TSTUI_*" | mv_regex "^\.TSTUI_" ""
+git_add_patch() {
+    # 先处理 .gitignore, 不然会灵车.
+    findwrap_patch
+    findwrap ".gitattributes" | mv_regex "\(.*\)" ".TSTUI_\1"
+    findwrap ".git" | mv_regex "\(.*\)" ".TSTUI_\1"
 }
 
 git_clean_patch() {
@@ -132,7 +132,13 @@ git_clean_patch() {
         return
     fi
 
+    # 先处理 .gitignore, 不然会灵车.
+    findwrap_patch
     findwrap ".git" | xargs rm -rf
+}
+
+all_unpatch() {
+    findwrap ".TSTUI_*" | mv_regex "^\.TSTUI_" ""
 }
 
 # from termux-setup-storage
@@ -157,8 +163,8 @@ snapshot_create() {
     info "Creating snapshot '$branch_name'..."
     git_add_patch
     gitwrap add "$TERMUX_ROOT"
+    all_unpatch
     gitwrap commit -m "nya"
-    git_add_unpatch
 
     ok "Snapshot '${branch_name}' creation completed."
 }
@@ -168,10 +174,10 @@ snapshot_restore() {
     check_branch_orexit "$branch_name"
 
     info "Restoring to snapshot '$branch_name'..."
-    git_clean_patch
     gitwrap reset --hard "$branch_name"
+    git_clean_patch
     gitwrap clean -fd
-    git_add_unpatch
+    all_unpatch
     envfix &>/dev/null
 
     ok "Restore to snapshot '${branch_name}' completed."
