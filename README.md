@@ -24,7 +24,7 @@ For more information, see `tstui --help`.
 ## Config
 
 You can configure ignore rules in the `~/.tstuignore` file.
-These paths will be ignored during backup.
+These paths will be skipped during backup and rollback.
 
 ```
 # The format is consistent with the .gitignore file.

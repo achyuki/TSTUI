@@ -161,6 +161,7 @@ snapshot_create() {
     gitwrap checkout --orphan "$branch_name"
 
     info "Creating snapshot '$branch_name'..."
+    gitwrap rm -rf --cached "$TERMUX_ROOT" &>/dev/null # 灵车
     git_add_patch
     gitwrap add "$TERMUX_ROOT"
     all_unpatch
