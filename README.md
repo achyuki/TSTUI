@@ -2,6 +2,9 @@
 
 > TermuxSnapshotTUI - Fast rollback and backup of termux based on git.
 
+> **⚠️ Warning**  
+> This is an unstable solution and is not recommended for use.
+
 ## Install
 
 ```
