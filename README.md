@@ -31,7 +31,7 @@ These paths will be skipped during backup and rollback.
 
 ```
 # The format is consistent with the .gitignore file.
-# The root directory is $TERMUX_APP__Files_DIR.
+# The root directory is $TERMUX_APP__DATA_DIR/files.
 
 /apps
 /usr/tmp

@@ -3,7 +3,8 @@
 # Licensed under the MIT License.
 # https://github.com/achyuki/TSTUI/blob/main/LICENSE
 
-TERMUX_ROOT="$TERMUX_APP__FILES_DIR"
+TERMUX_DATA="$TERMUX_APP__DATA_DIR"
+TERMUX_ROOT="$TERMUX_DATA/files"
 TERMUX_HOME="$TERMUX_ROOT/home" # Not equal $HOME
 TSTUI_GITDIR="$TERMUX_HOME/.TSTUIDATA"
 TSTUI_IGNORE="$TERMUX_HOME/.tstuiignore"
@@ -27,13 +28,18 @@ info() {
     echo -e "${COLOR_YELLOW}$*${COLOR_RESET}"
 }
 
+if [ -z "$TERMUX_DATA" ]; then
+    error "Terminux environment exception!"
+    exit 1
+fi
+
 if [[ $UID -eq 0 ]]; then
     error "Please do not run TSTUI as root!"
     exit 1
 fi
 
 # Install dependencies
-if ! which dialog git &>/dev/null; then
+if ! command -v dialog >/dev/null 2>&1 || ! command -v git >/dev/null 2>&1; then
     apt-get update && apt-get install -y dialog git
     if [ $? -ne 0 ]; then
         echo "Dependency installation failed!"
